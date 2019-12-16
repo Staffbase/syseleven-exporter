@@ -16,7 +16,7 @@ ARG VERSION
 LABEL maintainer="Staffbase GmbH"
 LABEL git.ref=$REVISION
 LABEL git.version=$VERSION
-LABEL git.url="https://github.com/Staffbase/syselven-exporter"
+LABEL git.url="https://github.com/Staffbase/syseleven-exporter"
 
 RUN apk add --no-cache --update curl ca-certificates
 HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD curl --fail http://localhost:8080/_health || exit 1
