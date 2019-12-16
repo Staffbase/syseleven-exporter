@@ -1,7 +1,7 @@
 BRANCH      ?= $(shell git rev-parse --abbrev-ref HEAD)
 BUILDTIME   ?= $(shell date '+%Y-%m-%d@%H:%M:%S')
 BUILDUSER   ?= $(shell id -un)
-REPO        ?= github.com/Staffbase/internalauthservice
+REPO        ?= github.com/Staffbase/syseleven-exporter
 REVISION    ?= $(shell git rev-parse HEAD)
 VERSION     ?= $(shell git describe --tags)
 

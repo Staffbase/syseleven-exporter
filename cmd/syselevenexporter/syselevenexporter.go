@@ -55,6 +55,28 @@ var rootCmd = &cobra.Command{
 		go exporter.Run(interval, exp)
 
 		router := chi.NewRouter()
+		router.Get("/health", func(w http.ResponseWriter, r *http.Request) {
+			fmt.Fprintf(w, "OK")
+		})
+		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
+			w.Write([]byte(`<html>
+			<head><title>SysEleven Exporter</title></head>
+			<body>
+			<h1>SysEleven Exporter</h1>
+			<p><a href='/metrics'>Metrics</a></p>
+			<p>
+			<ul>
+			<li>version: ` + version.Version + `</li>
+			<li>branch: ` + version.Branch + `</li>
+			<li>revision: ` + version.Revision + `</li>
+			<li>go version: ` + version.GoVersion + `</li>
+			<li>build user: ` + version.BuildUser + `</li>
+			<li>build date: ` + version.BuildDate + `</li>
+			</ul>
+			</p>
+			</body>
+			</html>`))
+		})
 		router.Mount(metricsPath, promhttp.Handler())
 
 		server := &http.Server{
