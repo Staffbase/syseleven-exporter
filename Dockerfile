@@ -14,8 +14,6 @@ ARG REVISION
 ARG VERSION
 
 LABEL maintainer="Staffbase GmbH"
-LABEL git.ref=$REVISION
-LABEL git.version=$VERSION
 LABEL git.url="https://github.com/Staffbase/syseleven-exporter"
 
 RUN apk add --no-cache --update curl ca-certificates
