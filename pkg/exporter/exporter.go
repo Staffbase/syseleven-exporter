@@ -71,6 +71,26 @@ func Run(interval int64, exporter *Exporter) {
 			log.WithError(err).Error("Could not get current usage")
 		}
 
+		computeCoresTotal.Reset()
+		computeInstancesTotal.Reset()
+		computeRamTotalMegabytes.Reset()
+		dnsZonesTotal.Reset()
+		networkFloatingIPsTotal.Reset()
+		networkLoadbalancersTotal.Reset()
+		s3SpaceTotalBytes.Reset()
+		volumeSpaceTotalGigabytes.Reset()
+		volumeVolumesTotalGigabytes.Reset()
+		computeCoresUsed.Reset()
+		computeInstancesUsed.Reset()
+		computeRamUsedMegabytes.Reset()
+		dnsZonesUsed.Reset()
+		networkFloatingIPsUsed.Reset()
+		networkLoadbalancersUsed.Reset()
+		s3SpaceUsedBytes.Reset()
+		volumeSpaceUsedGigabytes.Reset()
+		volumeVolumesUsedGigabytes.Reset()
+		computeFlavorsUsed.Reset()
+
 		for k, v := range quota {
 			computeCoresTotal.With(prometheus.Labels{"region": k}).Set(v.ComputeCores)
 			computeInstancesTotal.With(prometheus.Labels{"region": k}).Set(v.ComputeInstances)
