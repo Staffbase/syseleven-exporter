@@ -1,6 +1,3 @@
-env:
-  image_name: public/syseleven-exporter
-
 name: Test, Build and Deploy
 
 on: [push]
@@ -49,7 +46,7 @@ jobs:
         with:
           dockerusername: ${{ secrets.DOCKER_USERNAME }}
           dockerpassword: ${{ secrets.DOCKER_PASSWORD }}
-          dockerimage: private/diablo-redbook
+          dockerimage: public/syseleven-exporter
           gitopstoken: ${{ secrets.GITOPS_TOKEN }}
           gitopsdev: |-
             clusters/customization/dev/mothership/syseleven-exporter/syseleven-exporter-cr.yaml spec.template.spec.containers.syseleven-exporter.image
