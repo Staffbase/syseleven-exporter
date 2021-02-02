@@ -54,3 +54,6 @@ jobs:
             clusters/customization/stage/mothership/syseleven-exporter/syseleven-exporter-cr.yaml spec.template.spec.containers.syseleven-exporter.image
           gitopsprod: |-
             clusters/customization/prod/mothership/syseleven-exporter/syseleven-exporter-cr.yaml spec.template.spec.containers.syseleven-exporter.image
+            clusters/customization/prod/mothership/syseleven-exporter/syseleven-exporter-dev-cr.yaml spec.template.spec.containers.syseleven-exporter.image
+            clusters/customization/prod/mothership/syseleven-exporter/syseleven-exporter-stage-cr.yaml spec.template.spec.containers.syseleven-exporter.image
+            clusters/customization/prod/mothership/syseleven-exporter/syseleven-exporter-prod-cr.yaml spec.template.spec.containers.syseleven-exporter.image
