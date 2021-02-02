@@ -21,12 +21,13 @@ import (
 	"github.com/gophercloud/gophercloud/openstack"
 )
 
-func GetToken(username, password string) (string, error) {
+func GetToken(projectID, username, password string) (string, error) {
 	opts := gophercloud.AuthOptions{
 		IdentityEndpoint: "https://keystone.cloud.syseleven.net:5000/v3",
 		Username:         username,
 		Password:         password,
 		DomainName:       "Default",
+		TenantID:         projectID,
 	}
 
 	provider, err := openstack.AuthenticatedClient(opts)

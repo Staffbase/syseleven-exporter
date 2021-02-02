@@ -22,6 +22,12 @@ import (
 	"net/http"
 )
 
+type Error struct {
+	Detail string `json:"detail"`
+	Title  string `json:"title"`
+	Type   string `json:"type"`
+}
+
 const endpoint = "https://api.cloud.syseleven.net:5001"
 
 func GetQuota(projectID, token string) (map[string]Quota, error) {
@@ -38,6 +44,17 @@ func GetQuota(projectID, token string) (map[string]Quota, error) {
 	}
 
 	defer resp.Body.Close()
+
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		var apiError Error
+
+		err = json.NewDecoder(resp.Body).Decode(&apiError)
+		if err != nil {
+			return nil, err
+		}
+
+		return nil, fmt.Errorf("%s: %s (%s)", apiError.Title, apiError.Detail, apiError.Type)
+	}
 
 	var quotas map[string]Quota
 	quotas = make(map[string]Quota)
@@ -64,6 +81,17 @@ func GetCurrentUsage(projectID, token string) (map[string]CurrentUsage, error) {
 	}
 
 	defer resp.Body.Close()
+
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		var apiError Error
+
+		err = json.NewDecoder(resp.Body).Decode(&apiError)
+		if err != nil {
+			return nil, err
+		}
+
+		return nil, fmt.Errorf("%s: %s (%s)", apiError.Title, apiError.Detail, apiError.Type)
+	}
 
 	var currentUsages map[string]CurrentUsage
 	currentUsages = make(map[string]CurrentUsage)

@@ -19,6 +19,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -60,12 +61,28 @@ var rootCmd = &cobra.Command{
 		log.Infof(version.Info())
 		log.Infof(version.BuildContext())
 
-		exp, err := exporter.New()
-		if err != nil {
-			log.WithError(err).Fatal("Could not create exporter")
+		if os.Getenv("OS_USERNAME") == "" {
+			log.Fatalf("OS_USERNAME is missing")
 		}
 
-		go exporter.Run(interval, exp)
+		if os.Getenv("OS_PASSWORD") == "" {
+			log.Fatalf("OS_PASSWORD is missing")
+		}
+
+		if os.Getenv("OS_PROJECT_ID") == "" {
+			log.Fatalf("OS_PROJECT_ID is missing")
+		}
+
+		for _, projectID := range strings.Split(os.Getenv("OS_PROJECT_ID"), ",") {
+			go func(id string) {
+				exp, err := exporter.New(id, os.Getenv("OS_USERNAME"), os.Getenv("OS_PASSWORD"))
+				if err != nil {
+					log.WithError(err).Fatal("Could not create exporter")
+				}
+
+				exporter.Run(interval, exp)
+			}(projectID)
+		}
 
 		router := chi.NewRouter()
 		router.Get("/health", func(w http.ResponseWriter, r *http.Request) {
