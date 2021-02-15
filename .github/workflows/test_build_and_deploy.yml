@@ -44,9 +44,10 @@ jobs:
       - name: GitOps (build, push and deploy a new Docker image)
         uses: ./.github/gitops
         with:
+          dockerregistry: index.docker.io
           dockerusername: ${{ secrets.DOCKER_USERNAME }}
           dockerpassword: ${{ secrets.DOCKER_PASSWORD }}
-          dockerimage: public/syseleven-exporter
+          dockerimage: staffbace/syseleven-exporter
           gitopstoken: ${{ secrets.GITOPS_TOKEN }}
           gitopsdev: |-
             clusters/customization/dev/mothership/syseleven-exporter/syseleven-exporter-cr.yaml spec.template.spec.containers.syseleven-exporter.image
