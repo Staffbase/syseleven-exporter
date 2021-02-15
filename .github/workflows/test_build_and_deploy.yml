@@ -44,7 +44,7 @@ jobs:
       - name: GitOps (build, push and deploy a new Docker image)
         uses: ./.github/gitops
         with:
-          dockerregistry: index.docker.io
+          dockerregistry: registry.hub.docker.com
           dockerusername: ${{ secrets.DOCKER_USERNAME }}
           dockerpassword: ${{ secrets.DOCKER_PASSWORD }}
           dockerimage: staffbace/syseleven-exporter
