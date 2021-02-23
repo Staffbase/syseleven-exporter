@@ -2,6 +2,8 @@
 
 Export your quota and current usage from the SysEleven API as Prometheus metrics. The exporter uses the `https://api.cloud.syseleven.net:5001` API endpoint to get the quota and usage statistics for all SysEleven resources.
 
+The SysEleven Exporter can be deployed using the [vfm/syseleven-exporter-chart](https://github.com/vfm/syseleven-exporter-chart/) Helm chart.
+
 ## Usage
 
 Clone the repository and build the binary:
