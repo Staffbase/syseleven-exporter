@@ -42,19 +42,27 @@ func New(projectID, username, password string) (*Exporter, error) {
 
 func Run(interval int64, exporter *Exporter) {
 	for {
+		log.Infof("Scrape Quota and Usage Metrics")
+
 		token, err := auth.GetToken(exporter.ProjectID, exporter.Username, exporter.Password)
 		if err != nil {
 			log.WithError(err).Error("Could not get API Token")
+			time.Sleep(60 * time.Second)
+			continue
 		}
 
 		quota, err := api.GetQuota(exporter.ProjectID, token)
 		if err != nil {
 			log.WithError(err).Error("Could not get quota")
+			time.Sleep(60 * time.Second)
+			continue
 		}
 
 		usage, err := api.GetCurrentUsage(exporter.ProjectID, token)
 		if err != nil {
 			log.WithError(err).Error("Could not get current usage")
+			time.Sleep(60 * time.Second)
+			continue
 		}
 
 		computeCoresTotal.Reset()
