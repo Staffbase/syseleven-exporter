@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: syseleven-exporter
+  annotations:
+    github.com/project-slug: Staffbase/syseleven-exporter
+  tags:
+    - go
+spec:
+  type: service
+  lifecycle: production
