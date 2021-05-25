@@ -49,10 +49,6 @@ jobs:
           dockerpassword: ${{ secrets.DOCKER_PASSWORD }}
           dockerimage: staffbace/syseleven-exporter
           gitopstoken: ${{ secrets.GITOPS_TOKEN }}
-          gitopsdev: |-
-            clusters/customization/dev/mothership/syseleven-exporter/syseleven-exporter-cr.yaml spec.template.spec.containers.syseleven-exporter.image
-          gitopsstage: |-
-            clusters/customization/stage/mothership/syseleven-exporter/syseleven-exporter-cr.yaml spec.template.spec.containers.syseleven-exporter.image
           gitopsprod: |-
             clusters/customization/prod/mothership/syseleven-exporter/syseleven-exporter-cr.yaml spec.template.spec.containers.syseleven-exporter.image
             clusters/customization/prod/mothership/syseleven-exporter/syseleven-exporter-dev-cr.yaml spec.template.spec.containers.syseleven-exporter.image
